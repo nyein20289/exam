@@ -14,7 +14,7 @@
         <section>
             <h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績変更</h2>
 
-            <form action="ScoreUpdateExecute.action" method="post">
+            <form action="TestUpdateExecute.action" method="post">
 
                 <div class="mb-3 px-4">
                     <label for="studentNo" class="form-label">学生番号</label>
