@@ -1,5 +1,6 @@
 package scoremanager.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.Subject;
@@ -43,6 +44,17 @@ public class TestRegistAction extends Action {
 
         SubjectDao subjectDao =
                 new SubjectDao();
+        
+        List<Integer> yearList =
+                new ArrayList<>();
+
+        yearList.add(2023);
+        yearList.add(2024);
+        yearList.add(2025);
+
+        req.setAttribute(
+                "yearList",
+                yearList);
 
         // クラス一覧取得
         List<String> classList =
