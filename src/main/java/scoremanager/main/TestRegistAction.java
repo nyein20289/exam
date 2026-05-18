@@ -1,55 +1,71 @@
-// TestRegistAction.java
+package scoremanager.main;
 
-package score;
+import java.util.List;
 
-import java.io.IOException;
-
-import bean.Score;
-import dao.ScoreDao;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
+import bean.Subject;
+import bean.Teacher;
+import dao.ClassNumDao;
+import dao.SubjectDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import tool.Action;
 
-public class TestRegistAction extends HttpServlet {
+public class TestRegistAction extends Action {
 
     @Override
-    protected void doPost(
-            HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
+    public void execute(
+            HttpServletRequest req,
+            HttpServletResponse res)
+            throws Exception {
 
-        try {
+        // セッション取得
+        HttpSession session =
+                req.getSession();
 
-            // パラメータ取得
-            String studentNo =
-                request.getParameter("studentNo");
+        // ログインユーザー取得
+        Teacher teacher =
+                (Teacher)session.getAttribute("user");
 
-            String subjectCd =
-                request.getParameter("subjectCd");
+        // null対策
+        if (teacher == null) {
 
-            int point =
-                Integer.parseInt(
-                    request.getParameter("point"));
+            res.sendRedirect(
+                req.getContextPath()
+                + "/scoremanager/main/login.jsp");
 
-            // Bean作成
-            Score score = new Score();
-
-            score.setStudentNo(studentNo);
-            score.setSubjectCd(subjectCd);
-            score.setPoint(point);
-
-            // DAO実行
-            ScoreDao dao = new ScoreDao();
-
-            dao.save(score);
-
-            // 完了画面へ
-            response.sendRedirect("test_list.jsp");
-
-        } catch (Exception e) {
-
-            throw new ServletException(e);
+            return;
         }
+
+        // DAO生成
+        ClassNumDao classNumDao =
+                new ClassNumDao();
+
+        SubjectDao subjectDao =
+                new SubjectDao();
+
+        // クラス一覧取得
+        List<String> classList =
+                classNumDao.filter(
+                    teacher.getSchool());
+
+        // 科目一覧取得
+        List<Subject> subjectList =
+                subjectDao.filter(
+                    teacher.getSchool());
+
+        // requestへ保存
+        req.setAttribute(
+                "classList",
+                classList);
+
+        req.setAttribute(
+                "subjectList",
+                subjectList);
+
+        // JSPへ
+        req.getRequestDispatcher(
+                "test_regist.jsp")
+                .forward(req, res);
     }
 }
