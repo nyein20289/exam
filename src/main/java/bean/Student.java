@@ -37,6 +37,11 @@ public class Student implements Serializable {
 	private School school;
 
 	/**
+	 * 学校コード：String (teamwork用)
+	 */
+	private String schoolCd;
+
+	/**
 	 * ゲッタ・セッタ
 	 */
 	public String getNo() {
@@ -85,6 +90,23 @@ public class Student implements Serializable {
 
 	public void setSchool(School school) {
 		this.school = school;
+		if (school != null) {
+			this.schoolCd = school.getCd();
+		}
+	}
+
+	public String getSchoolCd() {
+		if (schoolCd != null) {
+			return schoolCd;
+		}
+		if (school != null) {
+			return school.getCd();
+		}
+		return null;
+	}
+
+	public void setSchoolCd(String schoolCd) {
+		this.schoolCd = schoolCd;
 	}
 
 }
