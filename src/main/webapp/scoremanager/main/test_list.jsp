@@ -26,31 +26,40 @@
 
 			</h2>
 
-			<!-- 検索フォーム -->
+			<!-- 科目情報検索 -->
+
 			<form action="TestListSubjectExecute.action"
 				method="get">
 
-				<div class="row px-4 g-3 align-items-end">
+				<div
+					class="row px-4 g-3 align-items-end">
 
 					<!-- 入学年度 -->
+
 					<div class="col-md-2">
 
 						<label class="form-label">
+
 							入学年度
+
 						</label>
 
 						<select name="entYear"
 							class="form-select">
 
 							<option value="">
+
 								--------
+
 							</option>
 
 							<c:forEach var="year"
 								items="${yearList}">
 
 								<option value="${year}">
+
 									${year}
+
 								</option>
 
 							</c:forEach>
@@ -60,24 +69,31 @@
 					</div>
 
 					<!-- クラス -->
+
 					<div class="col-md-2">
 
 						<label class="form-label">
+
 							クラス
+
 						</label>
 
 						<select name="classNum"
 							class="form-select">
 
 							<option value="">
+
 								--------
+
 							</option>
 
 							<c:forEach var="c"
 								items="${classList}">
 
 								<option value="${c}">
+
 									${c}
+
 								</option>
 
 							</c:forEach>
@@ -87,16 +103,20 @@
 					</div>
 
 					<!-- 科目 -->
+
 					<div class="col-md-3">
 
 						<label class="form-label">
+
 							科目
+
 						</label>
 
 						<select name="subjectCd"
 							class="form-select">
 
 							<option value="">
+
 								--------
 
 							</option>
@@ -105,7 +125,9 @@
 								items="${subjectList}">
 
 								<option value="${s.cd}">
+
 									${s.name}
+
 								</option>
 
 							</c:forEach>
@@ -115,17 +137,22 @@
 					</div>
 
 					<!-- 回数 -->
+
 					<div class="col-md-2">
 
 						<label class="form-label">
+
 							回数
+
 						</label>
 
 						<select name="no"
 							class="form-select">
 
 							<option value="">
+
 								--------
+
 							</option>
 
 							<option value="1">
@@ -140,12 +167,13 @@
 
 					</div>
 
-					<!-- 検索 -->
-					<div class="col-md-2">
+					<!-- 検索ボタン -->
+
+					<div class="col-md-1">
 
 						<input type="submit"
 							value="検索"
-							class="btn btn-secondary w-100">
+							class="btn btn-secondary">
 
 					</div>
 
@@ -154,16 +182,20 @@
 			</form>
 
 			<!-- 学生番号検索 -->
+
 			<form action="TestListStudentExecute.action"
 				method="get"
 				class="mt-4 px-4">
 
-				<div class="row g-3 align-items-end">
+				<div
+					class="row g-3 align-items-end">
 
-					<div class="col-md-3">
+					<div class="col-md-4">
 
 						<label class="form-label">
+
 							学生番号
+
 						</label>
 
 						<input type="text"
@@ -173,11 +205,11 @@
 
 					</div>
 
-					<div class="col-md-2">
+					<div class="col-md-1">
 
 						<input type="submit"
 							value="検索"
-							class="btn btn-secondary w-100">
+							class="btn btn-secondary">
 
 					</div>
 
@@ -185,7 +217,8 @@
 
 			</form>
 
-			<!-- エラー -->
+			<!-- エラーメッセージ -->
+
 			<c:if test="${errors.size() > 0}">
 
 				<div class="mt-3 px-4">
@@ -196,7 +229,9 @@
 							items="${errors}">
 
 							<li>
+
 								${error}
+
 							</li>
 
 						</c:forEach>
@@ -207,10 +242,25 @@
 
 			</c:if>
 
+			<!-- 初期メッセージ -->
+
+			<c:if test="${testList == null}">
+
+				<div
+					class="mt-4 px-4 text-info">
+
+					科目情報を選択または学生番号を入力して検索ボタンをクリックしてください
+
+				</div>
+
+			</c:if>
+
 			<!-- データなし -->
+
 			<c:if test="${testList != null && testList.size() == 0}">
 
-				<div class="mt-4 px-4 text-info">
+				<div
+					class="mt-4 px-4 text-danger">
 
 					学生情報が存在しませんでした
 
@@ -219,6 +269,7 @@
 			</c:if>
 
 			<!-- 一覧 -->
+
 			<c:if test="${testList != null && testList.size() > 0}">
 
 				<div class="mt-4 px-4">
@@ -226,7 +277,8 @@
 					<table
 						class="table table-bordered table-hover">
 
-						<thead class="table-secondary">
+						<thead
+							class="table-secondary">
 
 							<tr>
 

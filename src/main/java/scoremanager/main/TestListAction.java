@@ -29,7 +29,7 @@ public class TestListAction extends Action {
                 (Teacher)session.getAttribute(
                         "user");
 
-        // null対策
+        // ログイン確認
         if (teacher == null) {
 
             res.sendRedirect(
@@ -39,7 +39,7 @@ public class TestListAction extends Action {
             return;
         }
 
-        // DAO生成
+        // DAO
         ClassNumDao classNumDao =
                 new ClassNumDao();
 
