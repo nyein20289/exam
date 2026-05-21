@@ -41,7 +41,7 @@ public class StudentUpdateExecuteAction extends Action {
 		student.setClassNum(class_num);
 		student.setAttend(isAttend);
 		// 変更内容を保存
-		studentDao.save(student);
+		studentDao.update(student);
 
 		// レスポンス値をセット 6
 		// なし
